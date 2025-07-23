@@ -37,5 +37,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           npm exec gh-pages -- \
             -d build \
-            -r https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git \
-            -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+            -r https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
