@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_call:
+    inputs:
+      target_branch:
+        description: 'Name the branch to checkout and deploy'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch specified by user
+        uses: actions/checkout@v3
+        with:
+          ref: ${{inputs.target_branch}}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # or whatever version your project uses
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm run deploy
