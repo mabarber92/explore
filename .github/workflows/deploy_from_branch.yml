@@ -35,4 +35,4 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          npm run deploy
+          REPO=https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git npm run deploy
